@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Запись {{ post.id }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <article>
+        <ul>
+            <li>Место: {{ post.location }}</li>
+            <li>Дата: {{ post.date }}</li>
+            <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
+        </ul>
+        
+        <p>{{ post.text|linebreaks }}</p>
+    </article>
+    
+    <a href="{% url 'blog:index' %}" class="btn btn-secondary">
+        ← Вернуться на главную
+    </a>
+</div>
+{% endblock %}

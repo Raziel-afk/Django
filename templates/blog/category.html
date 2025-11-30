@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Записи категории {{ category_slug }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Публикации в категории - {{ category_slug }}</h1>
+    
+    {% for post in category_posts %}
+    <article class="mb-4">
+        <ul>
+            <li>Место: {{ post.location }}</li>
+            <li>Дата: {{ post.date }}</li>
+        </ul>
+        
+        <p>{{ post.text|truncatewords:10 }}</p>
+        
+        <a href="{% url 'blog:post_detail' post.id %}" class="btn btn-primary">
+            Читать полный текст
+        </a>
+        
+        {% if not forloop.last %}
+        <hr>
+        {% endif %}
+    </article>
+    {% empty %}
+    <p>В этой категории пока нет записей.</p>
+    {% endfor %}
+    
+    <a href="{% url 'blog:index' %}" class="btn btn-secondary">
+        ← Вернуться на главную
+    </a>
+</div>
+{% endblock %}
